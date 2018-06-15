@@ -2,13 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Nssf</title>
 </head>
 <body>
-    <h1>Index page</h1>
-    <form method="post" enctype="multipart/form-data" action="">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
+    <h1>Ecollections</h1>
+    <di>
+        <form method="post" enctype="multipart/form-data" action="/ecollections/upload/">
+            {% csrf_token %}
+            <label>History data upload</label><br>
+            <input type="file" name="file">
+            <input type="submit" name="previous" value="Upload">
+        </form>
+    </di>
+    <br>
+    <div>
+        <form method="post" enctype="multipart/form-data" action="/ecollections/upload/collections/">
+            {% csrf_token %}
+            <label>Collections data upload</label><br>
+            <input type="file" name="file_collections">
+            <input type="submit" name="collections" value="Upload">
+        </form>
+
+    </div>
+
 </body>
 </html>
