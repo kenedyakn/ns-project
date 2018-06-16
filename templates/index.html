@@ -3,27 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <title>Nssf</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        h3 {
+            padding: 0;
+            margin: 0;
+        }
+
+        #content {
+            padding: 20px;
+
+        }
+
+        #filter {
+            padding: 20px;
+            background: #cecece;
+        }
+
+        ul#menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        ul#menu li {
+            float: left;
+        }
+
+        ul#menu li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        ul#menu li a:hover {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+
+        .emp {
+            color: red;
+        }
+
+        .dup {
+            color: red;
+        }
+
+        .status{
+            color: red;
+        }
+
+        #warnings {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Ecollections</h1>
-    <di>
-        <form method="post" enctype="multipart/form-data" action="/ecollections/upload/">
+<div id="header">
+    <ul id="menu">
+        <li><a class="active" href="/ecollections/">Upload</a></li>
+        <li><a href="/ecollections/collections/">Filter</a></li>
+    </ul>
+</div>
+<div id="content">
+    <div>
+        <form method="post" enctype="multipart/form-data" action="/ecollections/upload/history/">
             {% csrf_token %}
-            <label>History data upload</label><br>
+            <label>History data upload</label><br><br>
             <input type="file" name="file">
             <input type="submit" name="previous" value="Upload">
         </form>
-    </di>
-    <br>
+    </div>
+    <br><br>
     <div>
         <form method="post" enctype="multipart/form-data" action="/ecollections/upload/collections/">
             {% csrf_token %}
-            <label>Collections data upload</label><br>
+            <label>Collections data upload</label><br><br>
             <input type="file" name="file_collections">
             <input type="submit" name="collections" value="Upload">
         </form>
 
     </div>
-
+</div>
+<div id="warnings">
+    <div class="status">
+        {% if status %}
+            <h3 class="emp">{{ status }}</h3>
+        {% endif %}
+    </div>
+    <div id="no-parents">
+        {% if warnings.cnop > 0 %}
+            <h3 class="emp">Employee Record</h3>
+            <ul>
+                {% for nop in warnings.w_no_parent %}
+                    <li>No Employer with employer number <strong>{{ nop }}</strong></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div id="duplicate">
+        {% if warnings.cdup > 0 %}
+            <h3 class="dup">Duplicate</h3>
+            <ul>
+                {% for pw in warnings.w_payments %}
+                    <li>Entering duplicate record for <strong>{{ pw.0 }}</strong> <strong>{{ pw.1 }}</strong></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
 </body>
 </html>

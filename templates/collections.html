@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Collections</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        h3 {
+            padding: 0;
+            margin: 0;
+        }
+
+        #content {
+            padding: 20px;
+
+        }
+
+        #filter {
+            padding: 20px;
+            background: #cecece;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <ul>
+            <li><a href="/ecollections/">Upload</a></li>
+            <li><a class="active" href="/ecollections/collections/">Filter</a></li>
+        </ul>
+    </div>
+    <div id="filter">
+        <form action="/ecollections/collections/filter/">
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" name="employer_number" placeholder="Employer Number">
+                    </td>
+                    <td>
+                        <input type="text" name="employer_name" placeholder="Employer Name">
+                    </td>
+                    <td>
+                        <select name="year">
+                            <option value="" selected>Year</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="month">
+                            <option value="" selected>Month</option>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Filter">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="content">
+        <table border="1" width="900px">
+            <tr>
+                <td><strong>EMPLOYER NUMBER</strong></td>
+                <td><strong>EMPLOYER NAME</strong></td>
+                <td><strong>AMOUNT PAID</strong></td>
+                <td><strong>DATE</strong></td>
+            </tr>
+            {% for collection in collections %}
+                <tr>
+                    <td>{{ collection.0 }}</td>
+                    <td>{{ collection.1 }}</td>
+                    <td>{{ collection.2 }}</td>
+                    <td>{{ collection.3 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
