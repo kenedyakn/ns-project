@@ -209,8 +209,7 @@ def add_payment_record_collections(wbook, record, payments_warning_list):
             payments_warning_list.append((record[6], date))
             print("Payment for {0} : month {1} captured".format(record[6], record[8]))
         else:
-            #cursor.execute(full_query)
-            print(full_query)
+            cursor.execute(full_query)
             conn.commit()
     except mysql.connector.Error as err:
         print("Something went wrong: {}".format(err))
