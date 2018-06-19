@@ -95,7 +95,7 @@
             <td><strong>BANK MANUAL REFERENCE NUMBER</strong></td>
         </tr>
         </thead>
-        <tfoot>
+        {% comment %}<tfoot>
         <tr>
             <td><strong>FINANCE PROCESSED</strong></td>
             <td><strong>PRINTED RECEIPT</strong></td>
@@ -120,7 +120,7 @@
             <td><strong>ADDRESS NUMBER</strong></td>
             <td><strong>BANK MANUAL REFERENCE NUMBER</strong></td>
         </tr>
-        </tfoot>
+        </tfoot>{% endcomment %}
         <tbody>
         {% for collection in collections %}
                 <tr>

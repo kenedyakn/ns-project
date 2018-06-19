@@ -22,7 +22,7 @@
 
         #filter {
             padding: 20px;
-            background: #cecece;
+            background: #f2f5f9;
         }
 
         ul {
@@ -73,7 +73,7 @@
 </div>
 <div id="filter">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <form action="/ecollections/collections/filter/">
               <div class="form-row">
                 <div class="col">
@@ -129,14 +129,14 @@
                 <td><strong>DATE</strong></td>
             </tr>
         </thead>
-        <tfoot>
+        {% comment %}<tfoot>
             <tr>
                 <td><strong>EMPLOYER NUMBER</strong></td>
                 <td><strong>EMPLOYER NAME</strong></td>
                 <td><strong>AMOUNT PAID</strong></td>
                 <td><strong>DATE</strong></td>
             </tr>
-        </tfoot>
+        </tfoot>{% endcomment %}
         <tbody>
             {% for collection in collections %}
                 <tr>
