@@ -51,7 +51,7 @@ def upload_file_collections(request):
             if warnings["cnop"] == 0 and warnings["cdup"] == 0:
                 return render(request, 'index.html', {"status": "Upload successful"})
             else:
-                return render(request, 'index.html', {"warnings": warnings, "status":"File uploaded with warnings"})
+                return render(request, 'index.html', {"warnings": warnings, "status": "File uploaded with warnings"})
         else:
             return render(request, 'index.html', {"status": "No file selected"})
 
@@ -65,7 +65,7 @@ def handle_uploaded_file_collections(f):
 
 def db_dump_collections():
     wbook = xlrd.open_workbook('excel_data/collections.xlsx')
-    value =  process_collections_workbook(wbook)
+    value = process_collections_workbook(wbook)
     return value
 
 
@@ -90,38 +90,53 @@ def filter_search(request):
     year = request.GET.get('year')
     month = request.GET.get('month')
 
-    pattern = ''
-    dic = {}
+    if employer_name or employer_number or year or month:
+        pattern = ''
+        dic = {}
 
-    if employer_name:
-        dic["name"] = 'e.employer_name like \'%' + employer_name.strip() + '%\''
+        if employer_name:
+            dic["name"] = 'e.employer_name like \'%' + employer_name.strip() + '%\''
 
-    if employer_number:
-        dic["number"] = 'e.employer_number like \'%' + employer_number.strip() + '%\''
+        if employer_number:
+            dic["number"] = 'e.employer_number like \'%' + employer_number.strip() + '%\''
 
-    if year:
-        dic["year"] = 'p.date like \'%' + year.strip() + '%\''
+        if year:
+            dic["year"] = 'p.date like \'%' + year.strip() + '%\''
 
-    if month:
-        dic["month"] = 'MONTH(p.date) like \'%' + month.strip() + '%\''
+        if month:
+            dic["month"] = 'MONTH(p.date) like \'%' + month.strip() + '%\''
 
-    like_list = []
-    for key in dic:
-        like_list.append(dic[key])
+        like_list = []
+        for key in dic:
+            like_list.append(dic[key])
 
-    like_query = ' AND '.join(like_list)
+        like_query = ' AND '.join(like_list)
 
-    print("Query ", like_query)
+        print("Query ", like_query)
 
+        conn = mysql.connector.connect(user=database_username, password=database_password, host=database_ip,
+                                       database=database_name)
+        cursor = conn.cursor()
+        cursor.execute(
+            'select e.employer_number, e.employer_name, p.amount, p.date from '
+            'employers e left join payments p on e.employer_number = p.employer_number where ' + like_query)
+        data_list = cursor.fetchall()
+        conn.close()
+        return render(request, 'collections.html', {'collections': data_list})
+    else:
+        return render(request, 'collections.html')
+
+
+def get_master_data(request):
     conn = mysql.connector.connect(user=database_username, password=database_password, host=database_ip,
                                    database=database_name)
     cursor = conn.cursor()
     cursor.execute(
-        'select e.employer_number, e.employer_name, p.amount, p.date from '
-        'employers e left join payments p on e.employer_number = p.employer_number where ' + like_query)
+        'select * from collections')
     data_list = cursor.fetchall()
     conn.close()
-    return render(request, 'collections.html', {'collections': data_list})
+    print(data_list)
+    return render(request, 'master_file.html', {'collections': data_list})
 
 
 def detail(request, employer_id):

@@ -2,9 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Master file</title>
+    <style>
+        body {
+            margin: 0;
+            background: aquamarine;
+        }
+
+        h3 {
+            padding: 0;
+            margin: 0;
+        }
+
+        #content {
+            padding: 20px;
+
+        }
+
+        #filter {
+            padding: 20px;
+            background: #cecece;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+        table{
+            font-size:12px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 </head>
 <body>
+<div id="header">
+    <ul id="menu">
+        <li><a href="/ecollections/">Upload</a></li>
+        <li><a class="active" href="/ecollections/master-file/">Mast file</a></li>
+        <li><a href="/ecollections/collections/">Filter</a></li>
+    </ul>
+</div>
+<div id="content">
+    <table id="example" border="1" width="900px">
+        <thead>
+        <tr>
+            <td><strong>FINANCE PROCESSED</strong></td>
+            <td><strong>PRINTED RECEIPT</strong></td>
+            <td><strong>BRANCH CODE</strong></td>
+            <td><strong>RECEIPT NUMBER</strong></td>
+            <td><strong>NUMBER OF EMPLOYEES</strong></td>
+            <td><strong>PNFTU</strong></td>
+            <td><strong>EMPLOYER NUMBER</strong></td>
+            <td><strong>EMPLOYER NAME</strong></td>
+            <td><strong>DOP</strong></td>
+            <td><strong>DL DATE</strong></td>
+            <td><strong>RECEIPT DATE</strong></td>
+            <td><strong>TOTAL AMOUNT</strong></td>
+            <td><strong>CURRENCY CODE</strong></td>
+            <td><strong>CASH/CHEQUE NUMBER</strong></td>
+            <td><strong>BANK TRANSACTED</strong></td>
+            <td><strong>BANK</strong></td>
+            <td><strong>ARREAR AMOUNT</strong></td>
+            <td><strong>ARREARS PER MONTH</strong></td>
+            <td><strong>ARREAR PAID FOR</strong></td>
+            <td><strong>BONUS AMOUNT</strong></td>
+            <td><strong>ADDRESS NUMBER</strong></td>
+            <td><strong>BANK MANUAL REFERENCE NUMBER</strong></td>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td><strong>FINANCE PROCESSED</strong></td>
+            <td><strong>PRINTED RECEIPT</strong></td>
+            <td><strong>BRANCH CODE</strong></td>
+            <td><strong>RECEIPT NUMBER</strong></td>
+            <td><strong>NUMBER OF EMPLOYEES</strong></td>
+            <td><strong>PNFTU</strong></td>
+            <td><strong>EMPLOYER NUMBER</strong></td>
+            <td><strong>EMPLOYER NAME</strong></td>
+            <td><strong>DOP</strong></td>
+            <td><strong>DL DATE</strong></td>
+            <td><strong>RECEIPT DATE</strong></td>
+            <td><strong>TOTAL AMOUNT</strong></td>
+            <td><strong>CURRENCY CODE</strong></td>
+            <td><strong>CASH/CHEQUE NUMBER</strong></td>
+            <td><strong>BANK TRANSACTED</strong></td>
+            <td><strong>BANK</strong></td>
+            <td><strong>ARREAR AMOUNT</strong></td>
+            <td><strong>ARREARS PER MONTH</strong></td>
+            <td><strong>ARREAR PAID FOR</strong></td>
+            <td><strong>BONUS AMOUNT</strong></td>
+            <td><strong>ADDRESS NUMBER</strong></td>
+            <td><strong>BANK MANUAL REFERENCE NUMBER</strong></td>
+        </tr>
+        </tfoot>
+        <tbody>
+        {% for collection in collections %}
+                <tr>
+                    <td>{{ collection.1 }}</td>
+                    <td>{{ collection.2 }}</td>
+                    <td>{{ collection.3 }}</td>
+                    <td>{{ collection.4 }}</td>
+                    <td>{{ collection.5 }}</td>
+                    <td>{{ collection.6 }}</td>
+                    <td>{{ collection.7 }}</td>
+                    <td>{{ collection.8 }}</td>
+                    <td>{{ collection.9 }}</td>
+                    <td>{{ collection.10 }}</td>
+                    <td>{{ collection.11 }}</td>
+                    <td>{{ collection.12 }}</td>
+                    <td>{{ collection.13 }}</td>
+                    <td>{{ collection.14}}</td>
+                    <td>{{ collection.15}}</td>
+                    <td>{{ collection.16}}</td>
+                    <td>{{ collection.17}}</td>
+                    <td>{{ collection.18 }}</td>
+                    <td>{{ collection.19 }}</td>
+                    <td>{{ collection.20 }}</td>
+                    <td>{{ collection.21 }}</td>
+                    <td>{{ collection.22 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
 
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf'
+            ]
+        });
+    });
+</script>
 </body>
 </html>

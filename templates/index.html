@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Nssf</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <style>
         body {
             margin: 0;
+            background: aquamarine;
         }
 
         h3 {
@@ -72,7 +74,7 @@
 <div id="header">
     <ul id="menu">
         <li><a class="active" href="/ecollections/">Upload</a></li>
-        <li><a href="/ecollections/collections/">Filter</a></li>
+        <li><a href="/ecollections/master-file/">Mast file</a></li>
         <li><a href="/ecollections/collections/">Filter</a></li>
     </ul>
 </div>
@@ -82,7 +84,7 @@
             {% csrf_token %}
             <label>History data upload</label><br><br>
             <input type="file" name="file">
-            <input type="submit" name="previous" value="Upload">
+            <input type="submit" class="btn btn-primary" name="previous" value="Upload">
         </form>
     </div>
     <br><br>
@@ -91,7 +93,7 @@
             {% csrf_token %}
             <label>Collections data upload</label><br><br>
             <input type="file" name="file_collections">
-            <input type="submit" name="collections" value="Upload">
+            <input type="submit" class="btn btn-warning" name="collections" value="Upload">
         </form>
 
     </div>
@@ -123,5 +125,6 @@
         {% endif %}
     </div>
 </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
